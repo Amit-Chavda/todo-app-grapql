@@ -1,0 +1,49 @@
+scalar LocalDate
+scalar LocalDateTime
+
+schema{
+    mutation:Mutation
+    query:Query
+}
+
+type Mutation{
+    createTodo(todo:TodoInput):Todo
+    addTodoItems(todoId:ID,todoItems:[TodoItemInput]):[TodoItem]
+    updateTodoItem(todoItem:TodoItemInput):TodoItem
+}
+
+type Query{
+    getAllTodo:[Todo]
+}
+
+# Input types
+input TodoInput{
+    title:String
+    markAsComplete:Boolean
+    items:[TodoItemInput]
+}
+input TodoItemInput{
+    id:ID
+    notes:String
+    dueDate:LocalDate
+    markAsComplete:Boolean
+}
+
+# Output types
+type Todo{
+    id:ID
+    title:String
+    markAsComplete:Boolean
+    completionDate:LocalDate
+    items:[TodoItem]
+}
+
+type TodoItem{
+    id:ID
+    notes:String
+    dueDate:LocalDate
+    markAsComplete:Boolean
+    completionDate:LocalDate
+    createdAt:LocalDateTime
+    updatedAt:LocalDateTime
+}
